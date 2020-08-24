@@ -17,7 +17,7 @@
       <tr>
         <td><%= memo.title %></td>
         <td><%= memo.description %></td>
-        <td><%= memo.user_id %></td>
+        <td><%= memo.user.email.split("@").first %></td>
         <td><%= link_to 'Show', memo %></td>
         <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
         <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
