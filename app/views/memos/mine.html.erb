@@ -1,6 +1,20 @@
-<% @memos.each do |memo| %>
-    <div class="card">
-        <%= memo.title %>
-        <%= memo.description %>
+<div class="container">
+    <h2 class="text-center text-primary font-weight-bold pt-4">My memos</h2>
+    <div class="row justify-content-center pt-5">
+        <% @memos.each do |memo| %>
+            <div class="card w-75 my-2">
+                <div class="card-header">
+                    <h4 class="text-center"><%= memo.title %></h4>
+                </div>
+                <div class="card-body">
+                    <%= memo.description %>
+                </div>
+                <div class="card-footer">
+                    <%= link_to 'Show', memo, class: "btn btn-info" %>
+                    <%= link_to 'Edit', edit_memo_path(memo), class: "btn btn-success" %>            
+                    <%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                </div>
+            </div>
+        <% end %>
     </div>
-<% end %>
+</div>
