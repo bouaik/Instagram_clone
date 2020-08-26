@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :memos
-  resources :users, only: [:index]
+  resources :users, only: [:index, :show]
   devise_for :users
   root 'home#index'
 

@@ -11,21 +11,21 @@
         </button>
       </div>
       <div class="mt-3">
-          <% @memos.each do |memo| %>
-              <div class="card my-2">
-                  <div class="card-header">
-                      <h4 class="text-center"><%= memo.title %></h4>
-                  </div>
-                  <div class="card-body">
-                      <%= memo.description %>
-                  </div>
-                  <div class="card-footer">
-                      <%= link_to 'Show', memo, class: "btn btn-info" %>
-                      <%= link_to 'Edit', edit_memo_path(memo), class: "btn btn-success" %>            
-                      <%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                  </div>
-              </div>
-          <% end %>
+        <% @memos.each do |memo| %>
+          <div class="card my-2">
+            <div class="card-header">
+              <h4 class="text-center"><%= memo.title %></h4>
+            </div>
+            <div class="card-body">
+              <%= memo.description %>
+            </div>
+            <div class="card-footer">
+              <%= link_to 'Show', memo, class: "btn btn-info" %>
+              <%= link_to 'Edit', edit_memo_path(memo), class: "btn btn-success" %>            
+              <%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -33,13 +33,13 @@
     <div class="container">
     <h2 class="text-primary font-weight-bold pt-4">All Users</h2>
     <div class="pt-5">
-        <% User.all.each do |user| %>
-            <div class="card my-2">
-                <div class="card-header">
-                    <h4 class="text-center"><%= user.email.split("@").first %></h4>
-                </div>
-            </div>
-        <% end %>
+      <% User.all.each do |user| %>
+        <div class="card my-2">
+          <div class="card-header">
+            <h4 class="text-center"><%= link_to  user.email.split("@").first, user %></h4>
+          </div>
+        </div>
+      <% end %>
     </div>
 </div>
   </div>
