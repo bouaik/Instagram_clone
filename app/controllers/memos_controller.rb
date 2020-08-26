@@ -75,6 +75,6 @@ class MemosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def memo_params
-      params.require(:memo).permit(:title, :description)
+      params.require(:memo).permit(:title, :description, :image)
     end
 end
