@@ -1,3 +1,24 @@
 <div class="container">
-    <h2 class="text-center text-primary bg-warning py-4 my-3"><%= @user.email.split("@").first %></h2>
+    <h2 class="text-center text-primary bg-warning py-4 my-3">
+    <%= @user.email.split("@").first %>
+    <% if current_user.following?(@user) %>
+        <%= button_to  friendships_path(user_id: @user.id), remote: true, method: :delete, class: "btn btn-danger" do %> 
+            <i class="fas fa-user-times"></i>
+        <% end %>
+    <% else %>
+        <%= button_to  friendships_path(user_id: @user.id), remote: true, class: "btn btn-success" do %> 
+            <i class="fas fa-user-plus"></i>
+        <% end %>
+    <% end %>
+    </h2>
+    <div>
+    <button type="button" class="btn btn-primary">
+        followers <span class="badge badge-light"><%= @user.followers.count %></span>
+    </button>
+
+    <button type="button" class="btn btn-info">
+        following <span class="badge badge-light"><%= @user.following.count %></span>
+    </button>
+
+    </div>
 </div>

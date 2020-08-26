@@ -54,3 +54,4 @@ end
 
 gem 'simple_form'
 gem 'devise'
+gem 'font-awesome-sass', '~> 5.13.0'

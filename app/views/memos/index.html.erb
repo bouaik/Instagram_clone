@@ -31,12 +31,23 @@
   </div>
   <div class="col-md-4 bg-warning" style="position:sticky; top:0; height:100vh;">
     <div class="container">
-    <h2 class="text-primary font-weight-bold pt-4">All Users</h2>
-    <div class="pt-5">
-      <% User.all.each do |user| %>
+    <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1">To follow</h2>
+    <div class="pt-3">
+      <% User.where.not(id: current_user.id).each do |user| %>
         <div class="card my-2">
           <div class="card-header">
-            <h4 class="text-center"><%= link_to  user.email.split("@").first, user %></h4>
+            <h4 class="text-center d-flex justify-content-between">
+              <%= link_to  user.email.split("@").first, user %>
+              <% if current_user.following?(user) %>
+                <%= button_to  friendships_path(user_id: user.id), remote: true, method: :delete, class: "btn btn-danger" do %> 
+                  <i class="fas fa-user-times"></i>
+                <% end %>
+              <% else %>
+                <%= button_to  friendships_path(user_id: user.id), remote: true, class: "btn btn-success" do %> 
+                  <i class="fas fa-user-plus"></i>
+                <% end %>
+              <% end %>
+            </h4>
           </div>
         </div>
       <% end %>
