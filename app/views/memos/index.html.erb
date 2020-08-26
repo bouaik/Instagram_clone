@@ -31,6 +31,17 @@
   </div>
   <div class="col-md-4 bg-warning" style="position:sticky; top:0; height:100vh;">
     <div class="container">
+
+    <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1"><%= current_user.email.split("@").first%></h2>
+    <div class="row justify-content-between px-5">
+      <button type="button" class="btn btn-primary">
+        followers <span class="badge badge-light"><%= current_user.followers.count %></span>
+    </button>
+
+    <button type="button" class="btn btn-info">
+        following <span class="badge badge-light"><%= current_user.following.count %></span>
+    </button>
+    </div>
     <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1">To follow</h2>
     <div class="pt-3">
       <% User.where.not(id: current_user.id).each do |user| %>
