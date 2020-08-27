@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :friendships, only: [:create, :destroy]
   resources :memos
 
-  root 'home#index'
+  root 'memos#index'
 
   get "my_memos", to: "memos#mine"
 

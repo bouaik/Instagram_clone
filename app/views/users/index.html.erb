@@ -4,7 +4,7 @@
         <% @users.each do |user| %>
             <div class="card w-75 my-2">
                 <div class="card-header">
-                    <h4 class="text-center"><%= user.email.split("@").first %></h4>
+                    <h4 class="text-center"><%= link_to user.email.split("@").first, user %></h4>
                 </div>
             </div>
         <% end %>

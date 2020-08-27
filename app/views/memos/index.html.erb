@@ -34,16 +34,18 @@
   </div>
   <div class="col-md-4 bg-warning overflow-auto" style="position:sticky; top:0; height:100vh;">
     <div class="container">
-    <% if current_user.profile_image.attached? %>
-      <%= image_tag current_user.profile_image, class: "img-fluid" %>
-    <% else %>
-      <%= image_tag "https://picsum.photos/id/237/200/300", class: "img-fluid" %>
-    <% end %>
-    <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1"><%= current_user.email.split("@").first%></h2>
-    <div class="row justify-content-between px-5">
-      <button type="button" class="btn btn-primary">
+    <div class="row my-2 justify-content-between">
+      <% if current_user.profile_image.attached? %>
+        <%= image_tag current_user.profile_image, class: "img-fluid profile_pic rounded-circle" %>
+      <% else %>
+        <%= image_tag "https://picsum.photos/id/237/200/300", class: "img-fluid" %>
+      <% end %>
+      <h2 class="text-white font-weight-bold mt-4 py-1"><%= current_user.email.split("@").first%></h2>
+    </div>
+    <div class="row justify-content-between">
+      <div class="btn btn-primary">
         followers <span class="badge badge-light"><%= current_user.followers.count %></span>
-    </button>
+    </div>
 
     <button type="button" class="btn btn-info">
         following <span class="badge badge-light"><%= current_user.following.count %></span>
@@ -52,6 +54,32 @@
     <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1">To follow</h2>
     <div class="pt-3">
       <% User.where.not(id: current_user.id).each do |user| %>
+        <% if !current_user.following?(user) %>
+        <div class="card my-2">
+          <div class="card-header">
+            <h4 class="text-center d-flex justify-content-between">
+              <%= link_to  user.email.split("@").first, user %>
+              <% if current_user.following?(user) %>
+                <%= button_to  friendships_path(user_id: user.id), remote: true, method: :delete, class: "btn btn-danger" do %> 
+                  <i class="fas fa-user-times"></i>
+                <% end %>
+              <% else %>
+                <%= button_to  friendships_path(user_id: user.id), remote: true, class: "btn btn-success" do %> 
+                  <i class="fas fa-user-plus"></i>
+                <% end %>
+              <% end %>
+            </h4>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+
+    <h2 class="text-white text-center bg-danger font-weight-bold mt-4 py-1">Followed by</h2>
+    <div class="pt-3">
+      <% current_user.followers.each do |user| %>
         <div class="card my-2">
           <div class="card-header">
             <h4 class="text-center d-flex justify-content-between">
@@ -74,6 +102,23 @@
   </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
